@@ -1,0 +1,615 @@
+import java.util.*;
+import java.lang.Math;
+
+class user
+{
+	String name;
+	int age;
+	long contact;
+	int wallet;
+	String username;
+	int pwd;
+	public user(String name,int age, long contact,int wallet,String username,int pwd)
+	{
+		this.name=name;
+		this.age=age;
+		this.contact=contact;
+		this.wallet=wallet;
+		this.username=username;
+		this.pwd=pwd;
+	}
+}
+
+class movie
+{
+	String movie_name;
+	String genre;
+	int rating;
+	int duration;
+	public movie(String movie_name,String genre,int rating,int duration)
+	{
+		this.movie_name=movie_name;
+		this.genre=genre;
+		this.rating=rating;
+		this.duration=duration;
+	}
+}
+class theater
+{
+    String theater_name;
+    String running_movie;
+    Stack<String>timings;
+    int availability_of_seats;
+    int ticket_price;
+    int [][] seatarrange;
+    public theater(String theater_name,String running_movie,Stack timings,int availability_of_seats,int ticket_price,int[][]seatarrange)
+    {
+        this.theater_name=theater_name;
+        this.running_movie=running_movie;
+        this.timings=timings;
+        this.availability_of_seats=availability_of_seats;
+        this.ticket_price=ticket_price;
+        this.seatarrange=seatarrange;
+    }
+}
+	
+public class mtbs{
+
+	Scanner sc=new Scanner(System.in);
+    public Stack<user> arr=new Stack<>();
+    public static ArrayList<movie> movielist=new ArrayList<>();
+   public static ArrayList<movie> selected_movie=new ArrayList<>();
+    public static ArrayList<theater>theaterlist=new ArrayList<>();
+   Stack<theater>selected_theater=new Stack<>();
+   String dnt;
+   int seatcnt=0;
+  
+   
+   public static void movie_list()
+   {
+       	movielist.add(new movie("kushi","love",5,180));
+		movielist.add(new movie("aadipurush","devotional",4,200));
+		movielist.add(new movie("baby","love",5,150));
+		movielist.add(new movie("jailer","action",5,210));
+   }
+   public static void theater_list()
+   {
+       Stack<String> timings1=new Stack<>();
+	    timings1.add("9:00 am");
+	    timings1.add("01:00 pm");
+	    timings1.add("5:00 pm");
+	    timings1.add("9:00pm");
+	    int [][]arr1={
+	        {1,1,1,0,0,1},
+	        {0,1,1,0,1,1},
+	        {1,0,0,1,1,1},
+	        {0,1,1,0,0,1},
+	        {1,1,0,0,1,0},
+	        {1,1,0,0,0,0}
+	        
+	    };
+	    theaterlist.add(new theater("prathap","kushi",timings1,20,150,arr1));
+	     Stack<String> timings=new Stack<>();
+	    timings.add("9:00 am");
+	    timings.add("01:00 pm");
+	    timings.add("5:00 pm");
+	    timings.add("9:00pm");
+	    int [][]arr2={
+	        {0,1,1,0,0,1},
+	        {0,1,1,0,0,0},
+	        {1,0,0,0,1,1},
+	        {0,1,1,0,0,1},
+	        {1,0,0,0,1,0},
+	        {1,1,0,0,0,0}
+	        
+	    };
+	    
+	    theaterlist.add(new theater("NVR","jailer",timings,15,145,arr2));
+	   
+	    
+	    Stack<String> timings2=new Stack<>();
+	    timings2.add("8:00 am");
+	    timings2.add("01:00 pm");
+	    timings2.add("04:30 pm");
+	    timings2.add("10:00pm");
+	    int [][]arr3={
+	        {1,1,1,1,1,1},
+	        {1,1,1,0,1,1},
+	        {1,0,1,1,1,1},
+	        {0,1,1,0,1,1},
+	        {1,1,1,0,1,1},
+	        {1,1,1,0,1,1}
+	        
+	    };
+	    theaterlist.add(new theater("palani","jawan",timings2,30,90,arr3));
+	    Stack<String> timings3=new Stack<>();
+	    timings2.add("8:00 am");
+	    timings2.add("01:00 pm");
+	    timings2.add("04:30 pm");
+	    timings2.add("10:00pm");
+	    int [][]arr4={
+	        {1,1,0,1,1,1},
+	        {0,1,1,0,1,0},
+	        {1,0,1,1,1,1},
+	        {0,0,1,0,1,1},
+	        {1,1,1,0,0,1},
+	        {1,0,1,0,1,1}
+	        
+	    };
+	    theaterlist.add(new theater("sv","baby",timings2,25,250,arr4));
+   }
+ 
+	public void userRegistration()
+	{
+	    user user;
+		System.out.println("enter details to register into account");
+		Scanner sc=new Scanner(System.in);
+		//ArrayList<user> arr=new ArrayList<>();
+		System.out.println("enter name");
+		String name=sc.nextLine();
+		System.out.println("enter age");
+		int age=sc.nextInt();
+		sc.nextLine();
+		System.out.println("enter contact number");
+		long contact=sc.nextLong();
+		System.out.println("enter amount to add into wallet");
+		int wallet=sc.nextInt();
+		System.out.println("enter username");
+		String Username=sc.next();
+		//sc.nextLine();
+		System.out.println("enter password");
+		int pswd=sc.nextInt();
+		System.out.println("please remember your credentails to further process");
+		
+		if(age>18 && wallet>500)
+		{
+		    arr.add(new user(name,age,contact,wallet,Username,pswd));
+		
+		System.out.println("user registered successfully");
+		System.out.println("the user entered details are");
+		System.out.println("name:-"+arr.get(0).name);
+		System.out.println("age(to successfully create account age should above 18):-"+arr.get(0).age);
+		System.out.println("contact number:-"+arr.get(0).contact);
+		System.out.println("wallet amount:-"+arr.get(0).wallet);
+		}
+		else
+		{
+		    System.out.println("details not reacted to our expectations");
+		    System.out.println("registration unsuccessfull");
+		}
+		//for(int i=0;i<arr.size();i++)
+		System.out.println(arr.get(0).pwd);
+		
+	}
+	public  boolean login() {
+	    //user user;
+	    
+		boolean isLogin = false;
+		Scanner sc = new Scanner(System.in);
+		while ( !isLogin ) {
+			System.out.print("\nEnter Your Username - ");
+			
+			String Username = sc.nextLine();
+			if ( arr.get(0).username.equalsIgnoreCase(Username) ) {
+				while ( !isLogin ) {
+					System.out.print("\nEnter Your Password - ");
+					int Password = sc.nextInt();
+					if (Password==arr.get(0).pwd) {
+						System.out.print("\nLogin successful!!");
+						isLogin = true;
+					}
+					else {
+						System.out.println("\nIncorrect Password");
+					}
+				}
+			}
+			else {
+				System.out.println("\nUsername not found");
+			}
+		}
+		return isLogin;
+	}
+
+	public void movieselection()
+	{
+	    
+		movie_list();
+		//user user;
+		System.out.println("here!! the list of movies present running in theaters");
+		
+		for(int i=0;i<movielist.size();i++)
+		{
+		    System.out.println(movielist.get(i).movie_name);
+		}
+	
+		System.out.println("enter your desired movie");
+		String title=sc.nextLine();
+		
+		for(int i=0;i<movielist.size();i++)
+		{
+			if(movielist.get(i).movie_name.equalsIgnoreCase(title))
+			{
+				selected_movie.add(movielist.get(i));
+				System.out.println("movie what you search is found");
+				System.out.println("the details about " +movielist.get(i).movie_name+" are");
+				System.out.println("movie name:-"+movielist.get(i).movie_name);
+				
+				System.out.println("movie genre:-"+movielist.get(i).genre);
+				System.out.println("movie rating:-"+movielist.get(i).rating);
+				System.out.println("movie duration:-"+movielist.get(i).duration);
+				break;
+			}
+		
+		
+			
+			
+		}
+	
+	}
+	public void theaterselection()
+	{
+	    
+	    theater_list();
+	    System.out.println("here the list of theaters available and corresponding movies running in theaters");
+	    for(int i=0;i<theaterlist.size();i++)
+	    {
+	        System.out.println(theaterlist.get(i).theater_name+" : "+theaterlist.get(i).running_movie);
+	    }
+	    
+	    System.out.println("enter in which theater you want to see your movie");
+	    System.out.println("please select a theater to your corresponding movie");
+	    String theate=sc.nextLine();
+	   /* for(int i=0;i<theaterlist.size();i++)
+	    {
+	        if(theaterlist.get(i).running_movie!=selected_movie.get(i).movie_name)
+	        {
+	            System.out.println("the movie what you select is not running in any theaters");
+	            System.exit(0);
+	        }
+	    }*/
+	    
+	    for(int i=0;i<theaterlist.size();i++)
+	    {
+	        if(theaterlist.get(i).theater_name.equalsIgnoreCase(theate))
+	        {
+	            selected_theater.add(theaterlist.get(i));
+	            System.out.println("theater found");
+	            System.out.println("details about "+theate+" are");
+	            System.out.println("theater name:-"+theaterlist.get(i).theater_name);
+	            System.out.println("timings:-"+theaterlist.get(i).timings);
+	            System.out.println("availability:-"+theaterlist.get(i).availability_of_seats);
+	            System.out.println("ticket fare:-"+theaterlist.get(i).ticket_price);
+	            break;
+	        }
+	        else if(theaterlist.get(i).theater_name.equalsIgnoreCase(theate) &&theaterlist.get(i).availability_of_seats==0)
+	        {
+	            System.out.println("the theater what you search is found but unfortunately theater is filled");
+	           
+	            
+	        }
+	       
+	        
+	   
+	        
+	    }
+	    
+	}
+		public void seatselection()
+		{
+		   // String dnt;
+		   int n_tckts;
+		    for(int k=0;k<selected_theater.size();++k)
+		    {
+		        System.out.println("your selected theater('"+selected_theater.get(k).theater_name+"')contains '"+selected_theater.get(k).availability_of_seats+" 'vacant seats");
+		        System.out.println("the vacant seats are shown below");
+		        
+		    for(int i=0;i<selected_theater.get(k).seatarrange.length;i++)
+		        {
+		            for(int j=0;j<selected_theater.get(k).seatarrange[0].length;j++)
+		            {
+		                
+		                
+		                System.out.print(" "+selected_theater.get(k).seatarrange[i][j]);
+		                
+		                
+		            }
+		            System.out.println("");
+		          }
+		          System.out.println("to book ticket you much login in your account");
+		          if(login())
+		          {
+		            System.out.println("enter number of tickets you want to book");
+		            n_tckts=sc.nextInt();
+		             seatcnt=seatcnt+n_tckts;
+		            System.out.println("enter prefered date(ddmmyy) and (-)time(hh:mm) (am/pm)to book");
+		            dnt=sc.next();
+		            sc.nextLine();
+		            
+		            int row,column;
+		            for(int z=0;z<n_tckts;z++)
+		            {
+		            System.out.println("select seat row number and column number to book");
+		            row=sc.nextInt();
+		            column=sc.nextInt();
+		            
+		            
+		            for(int m=0;m<selected_theater.get(k).seatarrange.length;m++)
+		            {
+		                for(int n=0;n<selected_theater.get(k).seatarrange[0].length;n++)
+		                {
+		                    selected_theater.get(k).seatarrange[row-1][column-1]=0;
+		                    //selected_theater.get(k).availability_of_seats;
+		                }
+		            }
+		            }
+		            selected_theater.get(k).availability_of_seats=selected_theater.get(k).availability_of_seats-n_tckts;
+		            System.out.println("seat booked successfully");
+		           // System.out.println("number of vacnt seats after booking"+selected_theater.get(k).availability_of_seats);
+		            System.out.println("after booking seat arrange");
+		            for(int o=0;o<selected_theater.get(k).seatarrange.length;o++)
+		            {
+		                for(int p=0;p<selected_theater.get(k).seatarrange[0].length;p++)
+		                {
+		                   System.out.print(" "+selected_theater.get(k).seatarrange[o][p]);
+		                   
+		                }
+		                System.out.println("");
+		            }
+		        
+		            
+		        
+		       
+		    
+		   System.out.println("number of vacnt seats after booking"+selected_theater.get(k).availability_of_seats);
+		    System.out.println("total amount should pay by user is"+n_tckts*selected_theater.get(0).ticket_price);
+		    //for(int i=0;i<arr.size();i++)
+		    
+		        arr.peek().wallet=arr.peek().wallet-n_tckts*selected_theater.get(0).ticket_price;
+		    
+		    System.out.println("the booking details are");
+		  
+		    
+		    System.out.println("user name"+arr.peek().name);
+		    for(int i=0;i<selected_movie.size();i++)
+		    System.out.println("movie name:-"+selected_movie.get(i).movie_name);
+		    for(int i=0;i<selected_theater.size();i++)
+		    System.out.println("theater name:-"+selected_theater.get(i).theater_name);
+		    System.out.println("number of tickets:-"+n_tckts);
+		    for(int i=0;i<selected_theater.size();i++)
+		    
+		    System.out.println("total amount"+n_tckts*selected_theater.get(i).ticket_price);
+		    
+		    System.out.println("date and time of movie"+dnt);
+		    
+		          }
+
+		    }
+		   
+
+		}
+			
+		
+	
+		public void ticketcancellation()
+		{
+		    System.out.println("please re enter number of  tickets you want to cancel");
+		    int n1=sc.nextInt();
+		    System.out.println("enter row number column number of each respectively to cancel");
+		    for(int i=0;i<n1;i++)
+		    {
+		        int row=sc.nextInt();
+		        int column=sc.nextInt();
+		        for(int m=0;m<selected_theater.get(0).seatarrange.length;m++)
+		            {
+		                for(int n=0;n<selected_theater.get(0).seatarrange[0].length;n++)
+		                {
+		                    selected_theater.get(0).seatarrange[row-1][column-1]=1;
+		                    //selected_theater.get(k).availability_of_seats;
+		                }
+		            }
+		    }
+		    //for(int i=0;i<arr.size();i++)
+		    
+		        arr.peek().wallet=arr.peek().wallet+n1*selected_theater.peek().ticket_price;
+		        
+		    
+		    System.out.println("amount refunded succesfully");
+		    
+		    System.out.println("after cancellation wallet amount is"+arr.peek().wallet);
+		    System.out.println("ticket cancelled successfully");
+		    
+		}
+		public void administration()
+		{
+		    
+		    movie_list();
+		    theater_list();
+		   
+		    
+		    
+		    System.out.println(" Enter user name");
+		    String user_name=sc.next();
+		    sc.nextLine();
+		    System.out.println("Enter password");
+		    int pwd=sc.nextInt();
+		    if(user_name.equalsIgnoreCase("dinesh123") && pwd==123456)
+		    {
+		        System.out.println("login successfully");
+		        System.out.println("details about reservation system are ");
+		        /*for(int i=0;i<theaterlist.size();i++)
+		        System.out.println(theaterlist.get(i));
+		        System.out.println("number of registrations done are:-"+arr.size());*/
+		            do 
+		            {
+		            System.out.println("enter 1 to see number of registrations done \nenter 2 to delete theater\nenter 3 to delete movie\n enter 4 to view ticket availability of theaters\nenter 5 to add new movie\nenter 6 to update existing movie\n enter 7 to see ticket sales\n enter 8 to exit");
+		            int choice=sc.nextInt();
+		            switch(choice)
+		            {
+		                
+		            
+		            case 1:
+		            
+		              System.out.println("number of registrations done are:-"+arr.size());  
+		            break;
+		            
+		           case 2:
+		                 
+		                System.out.println("enter theater name to delete");
+		                String name1=sc.next();
+		                sc.nextLine();
+		                for(int i=0;i<theaterlist.size();i++)
+		                {
+		                    if(theaterlist.get(i).theater_name.equalsIgnoreCase(name1))
+		                    {
+		                        theaterlist.remove(i);
+		                        
+		                    }
+		                    
+		                }
+		                System.out.println("theater deleted successfully");
+		                break;
+		                case 3:
+		            
+		            
+		                System.out.println("enter movie name to delete");
+		                String name=sc.next();
+		                sc.nextLine();
+		                for(int i=0;i<movielist.size();i++)
+		                {
+		                    if(movielist.get(i).movie_name.equalsIgnoreCase(name))
+		                    {
+		                        movielist.remove(i);
+		                        
+		                    }
+		                    
+		                }
+		                System.out.println("movie deleted successfully");
+		                
+		                 break;
+		                case 4:
+		                
+		                  
+		                   System.out.println("available of seats in each theater are displayed below");
+		                  
+		                   
+		                   for(int i=0;i<theaterlist.size()/2;i++)
+		                   {
+		                       System.out.println(theaterlist.get(i).theater_name+":"+theaterlist.get(i).availability_of_seats);
+		                   }
+		                  
+		                break;
+		                case 5:
+		                    System.out.println("enter movie details to add");
+		                    System.out.println("movie name");
+		                    String moviename=sc.nextLine();
+		                    sc.nextLine();
+		                    System.out.println("movie genre");
+		                    
+		                    String genree=sc.nextLine();
+		                    System.out.println("rating");
+		                    int rating=sc.nextInt();
+		                    System.out.println("duration");
+		                    int duration=sc.nextInt();
+		                    movielist.add(new movie(moviename,genree,rating,duration));
+		                    System.out.println("movie added successfully");
+		                    break;
+		                   case 6:
+		                       System.out.println("enter movie name to update");
+		                       String moviename1=sc.next();
+		                       sc.nextLine();
+		                       
+		                       for(int i=0;i<movielist.size();i++)
+		                       {
+		                           if(movielist.get(i).movie_name.equalsIgnoreCase(moviename1))
+		                           {
+		                                System.out.println("enter genr to update genre\n enter dur to update duration\n enter rat to update rating");
+		                                String ch=sc.nextLine();
+		                                if(ch.equalsIgnoreCase("genr"))
+		                                {
+		                                     System.out.println("enter movie genre--");
+		                                      String genr=sc.nextLine();
+		                                      movielist.get(i).genre=genr;
+		                                }
+		                               if(ch.equalsIgnoreCase("dur"))
+		                                {
+		                                    System.out.println("enter movie duration--");
+		                                    int dur=sc.nextInt();
+		                                     movielist.get(i).duration=dur;
+		                                 }
+		                              if(ch.equalsIgnoreCase("rat"))
+		                               {
+		                                    System.out.println("enter movie rating--");
+		                                    int rat=sc.nextInt();
+		                                   movielist.get(i).rating=rat;
+		                               }
+		                           }
+		                           
+		                       }
+		                  break;
+		                  case 7:
+		                     System.out.println("number of tickets booked are:---"+seatcnt);
+		                     break;
+		                  case 8:
+		                      System.exit(0);
+		                      break;
+		            }
+		            
+		            
+		    }while(true);
+		        
+		        
+		    }
+		}
+	
+
+	
+	public static void main(String[]args)
+	{
+		mtbs obj=new mtbs();
+		//movie a=new movie();
+		Scanner sc=new Scanner(System.in);
+		
+	do
+		{
+		    System.out.println("enter your choice");
+		System.out.println("1.Registration\n 2.movie selection\n 3.theater selection\n 4.seat selection\n 5.seat cancellation\n 6.administrator login(it has access only for administrator only)\n 7.exit");
+		int choice=sc.nextInt();
+		    switch(choice)
+		    {
+		    case 1:
+		   obj.userRegistration();
+		   break;
+		   case 2:
+		       obj.movieselection();
+		       break;
+		  case 3:
+		      obj.theaterselection();
+		      break;
+		  case 4:
+		      obj.seatselection();
+		      break;
+		  case 5:
+		      obj.ticketcancellation();
+		      break;
+		  case 6:
+		      obj.administration();
+		      break;
+		  case 7:
+		      System.exit(0);
+		
+		    }  
+		        
+		}while(true);
+		//obj.movieselection();
+		
+		
+		
+
+      
+		
+		
+    }
+}
+		
+		
+		
